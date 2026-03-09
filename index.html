@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Knowledge Asset Manager</title>
+    <link rel="stylesheet" href="static/css/style.css">
+</head>
+<body>
+    <div id="container" class="initial-state">
+        
+        <!-- 1열: 파일 선택 -->
+        <aside id="left-panel" class="panel glass">
+            <div class="selection-box">
+                <p class="guide-text">정리할 파일이나 폴더를 선택하세요.</p>
+                <div class="square-btn-container">
+                    <button class="square-btn" onclick="addFiles()">📄</button>
+                    <button class="square-btn" onclick="addFolder()">📂</button>
+                </div>
+            </div>
+            <div id="tree-divider" class="divider" style="display: none;"></div>
+            <div id="tree-scroll-area" style="display: none;">
+                <div id="file-tree"></div>
+            </div>
+            <div class="bottom-action-area">
+                <button id="btn-next-step" class="action-btn" onclick="nextStep()" disabled>다음 단계로</button>
+            </div>
+        </aside>
+
+        <!-- 2열: 파일 분석 결과 -->
+        <main id="middle-panel" class="panel glass">
+            <header class="panel-header"><h2>2. 파일 분석 결과</h2></header>
+            <div class="scroll-area" id="pdf-queue"></div>
+            <div class="unclassified-box bottom-box">
+                <h3 style="color: #e11d48; font-size: 0.85rem; margin-top: 0;">⚠️ 분류 불가 (기타 파일)</h3>
+                <div id="unclassified-list" class="bottom-list"></div>
+            </div>
+            <div class="bottom-action-area">
+                <button id="btn-start-classify" class="action-btn" onclick="startClassification()" disabled>분류 시작</button>
+            </div>
+        </main>
+
+        <!-- 3열: 파일 이동 대기열 -->
+        <aside id="right-panel" class="panel glass">
+            <header class="panel-header">
+                <h2>3. 파일 이동 대기열</h2>
+                <button class="small-btn" onclick="addNewFolder()">+ 새 폴더</button>
+            </header>
+            <div class="scroll-area" id="move-tree">
+                <div style="padding: 20px; color: #94a3b8; font-size: 0.88rem; text-align: center;">분류 시작 시 이동 제안이 표시됩니다.</div>
+            </div>
+            <div class="manual-box bottom-box">
+                <h3 style="color: #475569; font-size: 0.85rem; margin-top: 0;">📂 수동 분류</h3>
+                <div id="manual-list" class="bottom-list" ondragover="event.preventDefault()" ondrop="handleDropToManual(event)"></div>
+            </div>
+            <div class="bottom-action-area">
+                <button id="btn-confirm-move" class="action-btn apply" onclick="confirmMove()" disabled>이동 확정</button>
+            </div>
+        </aside>
+
+    </div>
+    <canvas id="overlay-canvas"></canvas>
+    <script src="static/js/app.js"></script>
+</body>
+</html>

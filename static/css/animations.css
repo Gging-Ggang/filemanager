@@ -1,0 +1,30 @@
+@keyframes slideInLeft {
+    from { opacity: 0; transform: translateX(-20px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes slideInRight {
+    from { opacity: 0; transform: translateX(20px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes fadeInScale {
+    from { opacity: 0; transform: scale(0.95); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+.active-state #left-panel {
+    animation: slideInLeft 0.5s ease-out;
+}
+
+.active-state #middle-panel {
+    animation: fadeInScale 0.6s ease-out 0.2s both;
+}
+
+.active-state #right-panel {
+    animation: slideInRight 0.5s ease-out 0.4s both;
+}
+
+.queue-item {
+    animation: fadeInScale 0.3s ease-out;
+}
